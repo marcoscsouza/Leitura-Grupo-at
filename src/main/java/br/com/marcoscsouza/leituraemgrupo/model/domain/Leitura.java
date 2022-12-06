@@ -23,7 +23,7 @@ public class Leitura {
 	@Override
 	public String toString() {
 		
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd//MM/yyyy HH:mm");
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		return String.format("%s;%s;%s",
 				dataRegistro.format(formato), 
 				detalhes, 
