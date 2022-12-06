@@ -1,5 +1,8 @@
 package br.com.marcoscsouza.leituraemgrupo.model.domain;
 
+import br.com.marcoscsouza.leituraemgrupo.auxiliar.Constante;
+import br.com.marcoscsouza.leituraemgrupo.exceptions.QuadrinhoInvalidoExceptions;
+
 public class Quadrinho extends Literatura {
 	
 	private int volume;
@@ -14,9 +17,24 @@ public class Quadrinho extends Literatura {
 	}
 
 	@Override
-	public String calcularRaridade() {
-		// TODO Auto-generated method stub
-		return null;
+	public String calcularRaridade() throws QuadrinhoInvalidoExceptions {
+		
+		if (getValor() == 0) {
+			throw new QuadrinhoInvalidoExceptions("Valor do quadrinho inválido");
+		}
+		
+		if (volume < 1) {
+			throw new QuadrinhoInvalidoExceptions("Volume do quadrinho inválido!");
+		}
+
+		int valorCompleto = finalizado ? 1 : 2 ;
+		float valorEstimado = (Constante.ANO_ATUAL - getAnoPublicado() + getValor()) * valorCompleto - volume ;
+		
+		if (valorEstimado > Constante.VALOR_MEDIO) {
+			return Constante.RARO;
+		}else {
+			return Constante.COMUM;
+		}
 	}
 
 	@Override
@@ -27,7 +45,7 @@ public class Quadrinho extends Literatura {
 		sb.append(";");
 		sb.append(volume);
 		sb.append(";");
-		sb.append(finalizado ? "Finalizado" : "Desenvolvimento");
+		sb.append(finalizado ? Constante.FINALIZADO : Constante.DESENVOLVIMENTO);
 		sb.append(";");
 		sb.append(ilustrador);
 		

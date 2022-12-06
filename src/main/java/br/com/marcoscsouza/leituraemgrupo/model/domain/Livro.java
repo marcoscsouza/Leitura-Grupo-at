@@ -1,5 +1,8 @@
 package br.com.marcoscsouza.leituraemgrupo.model.domain;
 
+import br.com.marcoscsouza.leituraemgrupo.auxiliar.Constante;
+import br.com.marcoscsouza.leituraemgrupo.exceptions.LivroInvalidoExceptions;
+
 public class Livro extends Literatura {
 	
 	private String genero;
@@ -14,9 +17,28 @@ public class Livro extends Literatura {
 	}
 
 	@Override
-	public String calcularRaridade() {
-		// TODO Auto-generated method stub
-		return null;
+	public String calcularRaridade() throws LivroInvalidoExceptions {
+		
+		if (getValor() == 0) {
+			throw new LivroInvalidoExceptions("Valor do livro inválido!");
+		}
+		
+		if (getAnoPublicado() == 0) {
+			throw new LivroInvalidoExceptions("Ano de publicação do livro inválido!");
+		}
+
+		int valorTraduzido = traduzido ? 2 : 1 ;
+		
+		float valorEstimado = (Constante.ANO_ATUAL - getAnoPublicado()) + getValor() * valorTraduzido;
+		
+		if ( valorEstimado > Constante.VALOR_ALTO) {
+			return Constante.MUITO_RARO;
+		}else if( valorEstimado < Constante.VALOR_MEDIO) {
+			return Constante.COMUM;
+		}else {
+			return Constante.RARO; 
+		}
+		
 	}
 
 	@Override
@@ -29,7 +51,7 @@ public class Livro extends Literatura {
 		sb.append(";");
 		sb.append(autor);
 		sb.append(";");
-		sb.append(traduzido ? "Traduzido" : "Sem tradução");
+		sb.append(traduzido ? Constante.TRADUZIDO : Constante.NAO_TRADUZIDO);
 		
 		return sb.toString();
 	}

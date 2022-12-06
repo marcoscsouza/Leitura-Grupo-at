@@ -1,5 +1,8 @@
 package br.com.marcoscsouza.leituraemgrupo.model.domain;
 
+import br.com.marcoscsouza.leituraemgrupo.auxiliar.Constante;
+import br.com.marcoscsouza.leituraemgrupo.exceptions.RevistaInvalidoExceptions;
+
 public class Revista extends Literatura {
 	
 	private String instituto;
@@ -14,9 +17,24 @@ public class Revista extends Literatura {
 	}
 
 	@Override
-	public String calcularRaridade() {
-		// TODO Auto-generated method stub
-		return null;
+	public String calcularRaridade() throws RevistaInvalidoExceptions {
+		if (getValor() == 0) {
+			throw new RevistaInvalidoExceptions("Valor da revista inválido!");
+		}
+		if (edicao < 1) {
+			throw new RevistaInvalidoExceptions("Edição da revista inválido!");
+		}
+		if (getAnoPublicado() == 0) {
+			throw new RevistaInvalidoExceptions("Ano da publicação da revista inválido!");
+		}
+		
+		int valorAno = Constante.ANO_ATUAL - getAnoPublicado();
+		float valorEstimado = valorAno + getValor();
+		if (valorEstimado > Constante.VALOR_REVISTA) {
+			return Constante.RARO;
+		}else {
+			return Constante.COMUM;
+		}
 	}
 
 	@Override

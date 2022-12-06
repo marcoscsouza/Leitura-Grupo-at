@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import br.com.marcoscsouza.leituraemgrupo.exceptions.GrupoInvalidoException;
+import br.com.marcoscsouza.leituraemgrupo.exceptions.LiteraturaInvalidoException;
+
 public class Leitura {
 	
 	private LocalDateTime dataRegistro;
@@ -25,6 +28,26 @@ public class Leitura {
 				dataRegistro.format(formato), 
 				detalhes, 
 				Presencial ? "Presencial" : "distância");
+	}
+	
+	public void imprimir() throws GrupoInvalidoException, LiteraturaInvalidoException {
+		if (grupo == null) {
+			throw new GrupoInvalidoException("Precisa ter um grupo vinculado!");
+		}
+		    
+		if (grupo.getIntegrantes() < 2) {
+			throw new GrupoInvalidoException("O grupo precisar ter pelo menos 2 integrantes!");
+		}
+		if (literaturas.size() == 0) {
+			throw new LiteraturaInvalidoException("Precisa ter pelo menos um tipo de literatura para ler");
+		}
+		
+		System.out.printf("Leitura: %s;%s;%d\n", this.toString(), grupo, literaturas.size());
+		System.out.println("Literaturas: ");
+		for (Literatura literatura : getLiteraturas()) {
+			System.out.println(literatura);
+		}
+
 	}
 
 	public LocalDateTime getDataRegistro() {

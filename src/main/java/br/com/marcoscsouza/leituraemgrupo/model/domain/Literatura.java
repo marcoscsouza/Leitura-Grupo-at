@@ -1,5 +1,9 @@
 package br.com.marcoscsouza.leituraemgrupo.model.domain;
 
+import br.com.marcoscsouza.leituraemgrupo.exceptions.LivroInvalidoExceptions;
+import br.com.marcoscsouza.leituraemgrupo.exceptions.QuadrinhoInvalidoExceptions;
+import br.com.marcoscsouza.leituraemgrupo.exceptions.RevistaInvalidoExceptions;
+
 public abstract class Literatura {
 
 	private int anoPublicado;
@@ -12,7 +16,7 @@ public abstract class Literatura {
 		this.valor = valor;
 	}
 	
-	public abstract String calcularRaridade();
+	public abstract String calcularRaridade() throws LivroInvalidoExceptions, QuadrinhoInvalidoExceptions, RevistaInvalidoExceptions;
 
 	@Override
 	public String toString() {

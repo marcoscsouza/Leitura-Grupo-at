@@ -1,5 +1,7 @@
 package br.com.marcoscsouza.leituraemgrupo.model.domain;
 
+import br.com.marcoscsouza.leituraemgrupo.auxiliar.Constante;
+
 public class Grupo {
 	
 	private int integrantes; 
@@ -31,7 +33,7 @@ public class Grupo {
 		sb.append(";");
 		sb.append(nomeResponsavel);
 		sb.append(";");
-		sb.append(ehEstudo ? "Estudo" : "Hobbie");
+		sb.append(ehEstudo ? Constante.ESTUDO : Constante.HOBBIE );
 		return sb.toString();
 	}
 	
