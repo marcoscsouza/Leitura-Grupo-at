@@ -24,10 +24,11 @@ public class Leitura {
 	public String toString() {
 		
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		return String.format("%s;%s;%s",
+		return String.format("%s;%s;%s;%d",
 				dataRegistro.format(formato), 
 				detalhes, 
-				Presencial ? "Presencial" : "distância");
+				Presencial ? "Presencial" : "distância",
+				literaturas.size());
 	}
 	
 	public void imprimir() throws GrupoInvalidoException, LiteraturaInvalidoException {

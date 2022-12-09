@@ -34,8 +34,9 @@ public class LeituraTest {
 			lt1.setPresencial(true);
 			lt1.setGrupo(gp1);
 			lt1.setLiteraturas(literaturas);
-
+			System.out.println(lt1);
 			lt1.imprimir();
+			
 		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
 			System.out.println("[ERROR] " + e.getMessage()) ;
 		} 
@@ -62,6 +63,7 @@ public class LeituraTest {
 			lt2.setPresencial(true);
 			lt2.setGrupo(gp1);
 			lt2.setLiteraturas(literaturas1);
+			System.out.println(lt2);
 
 			lt2.imprimir();
 		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {

@@ -29,7 +29,7 @@ public class Revista extends Literatura {
 		}
 		
 		int valorAno = Constante.ANO_ATUAL - getAnoPublicado();
-		float valorEstimado = valorAno + getValor();
+		float valorEstimado = valorAno + getValor() - edicao;
 		if (valorEstimado > Constante.VALOR_REVISTA) {
 			return Constante.RARO;
 		}else {
