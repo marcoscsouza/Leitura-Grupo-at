@@ -5,10 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import br.com.marcoscsouza.leituraemgrupo.model.domain.Grupo;
 import br.com.marcoscsouza.leituraemgrupo.model.domain.Leitura;
