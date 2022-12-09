@@ -24,8 +24,13 @@ public class LeituraTest {
 		literaturas.add(lv1);
 		literaturas.add(qd1);
 		literaturas.add(rv1);
+		List<Literatura> literaturas2 = new ArrayList<Literatura>();
+		literaturas2.add(rv1);
+		List<Literatura> literaturas3 = new ArrayList<Literatura>();
 
-		Grupo gp1 = new Grupo(2, "Marcos", false);
+		Grupo gp1 = new Grupo(5, "Marcos", false);
+		Grupo gp2 = new Grupo(2, "Alex", true);
+		Grupo gp3 = new Grupo(0, "Alex", true);
 
 		try {
 
@@ -34,42 +39,44 @@ public class LeituraTest {
 			lt1.setPresencial(true);
 			lt1.setGrupo(gp1);
 			lt1.setLiteraturas(literaturas);
+
 			System.out.println(lt1);
 			lt1.imprimir();
-			
-		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
-			System.out.println("[ERROR] " + e.getMessage()) ;
-		} 
-		
-		try {
-			List<Literatura> literaturas1 = new ArrayList<Literatura>();
 
+		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
+			System.out.println("[ERROR] " + e.getMessage());
+		}
+
+		System.out.println(" ");
+
+		try {
+			Leitura lt2 = new Leitura();
+			lt2.setDetalhes("Leitura para aprender");
+			lt2.setPresencial(true);
+			lt2.setGrupo(gp2);
+			lt2.setLiteraturas(literaturas2);
+
+			lt2.imprimir();
+		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
+			System.out.println("[ERROR] " + e.getMessage());
+		}
+
+		System.out.println(" ");
+
+		try {
 			Leitura lt2 = new Leitura();
 			lt2.setDetalhes("Leitura para aprender");
 			lt2.setPresencial(true);
 			lt2.setGrupo(gp1);
-			lt2.setLiteraturas(literaturas1);
+			lt2.setLiteraturas(literaturas3);
 
 			lt2.imprimir();
 		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
-			System.out.println("[ERROR] " + e.getMessage()) ;
+			System.out.println("[ERROR] " + e.getMessage());
 		}
-		try {
-			List<Literatura> literaturas1 = new ArrayList<Literatura>();
-			literaturas1.add(rv1);
 
-			Leitura lt2 = new Leitura();
-			lt2.setDetalhes("Leitura para aprender");
-			lt2.setPresencial(true);
-			lt2.setGrupo(gp1);
-			lt2.setLiteraturas(literaturas1);
-			System.out.println(lt2);
+		System.out.println(" ");
 
-			lt2.imprimir();
-		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
-			System.out.println("[ERROR] " + e.getMessage()) ;
-		}
-		
 		try {
 
 			Leitura lt2 = new Leitura();
@@ -80,24 +87,26 @@ public class LeituraTest {
 
 			lt2.imprimir();
 		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
-			System.out.println("[ERROR] " + e.getMessage()) ;
+			System.out.println("[ERROR] " + e.getMessage());
 		}
-		
+
+		System.out.println(" ");
+
 		try {
-			Grupo gp2 = new Grupo(1, "Marcos", false);
 
 			Leitura lt2 = new Leitura();
 			lt2.setDetalhes("Leitura para aprender");
 			lt2.setPresencial(true);
-			lt2.setGrupo(gp2);
+			lt2.setGrupo(gp3);
 			lt2.setLiteraturas(literaturas);
 
 			lt2.imprimir();
 		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
-			System.out.println("[ERROR] " + e.getMessage()) ;
-		}finally {
+			System.out.println("[ERROR] " + e.getMessage());
+		} finally {
 			System.out.println("Aplicação finalizada!");
 		}
+		
 
 	}
 
