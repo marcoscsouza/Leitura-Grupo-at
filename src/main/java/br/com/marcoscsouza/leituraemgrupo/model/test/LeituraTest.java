@@ -34,11 +34,9 @@ public class LeituraTest {
 
 		try {
 
-			Leitura lt1 = new Leitura();
+			Leitura lt1 = new Leitura(gp1, literaturas);
 			lt1.setDetalhes("Leitura para conhecer novas obras");
 			lt1.setPresencial(true);
-			lt1.setGrupo(gp1);
-			lt1.setLiteraturas(literaturas);
 
 			System.out.println(lt1);
 			lt1.imprimir();
@@ -50,11 +48,9 @@ public class LeituraTest {
 		System.out.println(" ");
 
 		try {
-			Leitura lt2 = new Leitura();
+			Leitura lt2 = new Leitura(gp2, literaturas2);
 			lt2.setDetalhes("Leitura para aprender");
 			lt2.setPresencial(true);
-			lt2.setGrupo(gp2);
-			lt2.setLiteraturas(literaturas2);
 
 			lt2.imprimir();
 		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
@@ -64,11 +60,21 @@ public class LeituraTest {
 		System.out.println(" ");
 
 		try {
-			Leitura lt2 = new Leitura();
+			Leitura lt2 = new Leitura(gp1, literaturas3);
 			lt2.setDetalhes("Leitura para aprender");
 			lt2.setPresencial(true);
-			lt2.setGrupo(gp1);
-			lt2.setLiteraturas(literaturas3);
+
+			lt2.imprimir();
+		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
+			System.out.println("[ERROR] " + e.getMessage());
+		}
+
+		System.out.println(" ");
+		
+		try {
+			Leitura lt2 = new Leitura(gp1, null);
+			lt2.setDetalhes("Leitura para aprender");
+			lt2.setPresencial(true);
 
 			lt2.imprimir();
 		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
@@ -79,11 +85,9 @@ public class LeituraTest {
 
 		try {
 
-			Leitura lt2 = new Leitura();
+			Leitura lt2 = new Leitura(null, literaturas);
 			lt2.setDetalhes("Leitura para aprender");
 			lt2.setPresencial(true);
-			lt2.setGrupo(null);
-			lt2.setLiteraturas(literaturas);
 
 			lt2.imprimir();
 		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {
@@ -94,11 +98,9 @@ public class LeituraTest {
 
 		try {
 
-			Leitura lt2 = new Leitura();
+			Leitura lt2 = new Leitura(gp3, literaturas);
 			lt2.setDetalhes("Leitura para aprender");
 			lt2.setPresencial(true);
-			lt2.setGrupo(gp3);
-			lt2.setLiteraturas(literaturas);
 
 			lt2.imprimir();
 		} catch (GrupoInvalidoException | LiteraturaInvalidoException e) {

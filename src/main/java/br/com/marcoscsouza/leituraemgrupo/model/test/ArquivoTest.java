@@ -5,10 +5,14 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
+import br.com.marcoscsouza.leituraemgrupo.exceptions.GrupoInvalidoException;
+import br.com.marcoscsouza.leituraemgrupo.exceptions.LiteraturaInvalidoException;
 import br.com.marcoscsouza.leituraemgrupo.model.domain.Grupo;
 import br.com.marcoscsouza.leituraemgrupo.model.domain.Leitura;
+import br.com.marcoscsouza.leituraemgrupo.model.domain.Literatura;
 import br.com.marcoscsouza.leituraemgrupo.model.domain.Livro;
 import br.com.marcoscsouza.leituraemgrupo.model.domain.Quadrinho;
 import br.com.marcoscsouza.leituraemgrupo.model.domain.Revista;
@@ -16,13 +20,11 @@ import br.com.marcoscsouza.leituraemgrupo.model.domain.Revista;
 public class ArquivoTest {
 
 	public static void main(String[] args) {
-		System.out.println("ola");
 
 		try {
 
 			try {
 
-//				String dir = "c:/dev/";
 				String arq = "grupoLeitura.txt";
 
 				FileReader file = new FileReader(arq);
@@ -35,10 +37,9 @@ public class ArquivoTest {
 
 				String[] campos = null;
 
-				int qtde = 0;
-				String nomeResponsavel = "";
-				String dataRegistro = "";
-
+				List<Literatura> literaturas = new ArrayList<Literatura>();
+				Leitura lt = null;
+				
 				while (linha != null) {
 
 					campos = linha.split(";");
@@ -47,29 +48,24 @@ public class ArquivoTest {
 					
 					case "P":
 						
-						boolean valorBool0 = true;
-						if ("Estudo".equals(campos[5])) {
-							valorBool0 = true;
-						}else {
-							valorBool0 = false; 
+						try {
+							boolean valorBool0 = true;
+							if ("Estudo".equals(campos[5])) {
+								valorBool0 = true;
+							}else {
+								valorBool0 = false; 
+							}
+							
+							lt = new Leitura(new Grupo(Integer.valueOf(campos[3]),campos[4],valorBool0),literaturas);
+							
+							lt.setDetalhes(campos[1]);
+							lt.setPresencial("Presencial".equals(campos[2]) ? true : false );
+							
+						} catch (NumberFormatException | GrupoInvalidoException | LiteraturaInvalidoException e) {
+							System.out.println("[ERRO]" + e.getMessage());
 						}
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-						Leitura lt = new Leitura();
 						
-						lt.setDetalhes(campos[1]);
-						lt.setPresencial("Presencial".equals(campos[2]) ? true : false );
-						
-						Grupo gp = new Grupo(
-								Integer.valueOf(campos[3]),
-								campos[4],
-								valorBool0
-								);
-						
-						
-						escrita.write(lt.toString() + gp.toString() + "\r\n"); 
-						nomeResponsavel = gp.getNomeResponsavel();
-
-						dataRegistro = lt.getDataRegistro().format(formatter);
+						escrita.write(lt.toString() + lt.getGrupo().toString() + "\r\n");
 						
 						break;
 
@@ -90,9 +86,9 @@ public class ArquivoTest {
 								campos[5],
 								valorBool								
 								);
+						literaturas.add(l);
 						
 						escrita.write(l.toString() + "\r\n");
-						qtde++;
 
 						break;
 
@@ -107,8 +103,8 @@ public class ArquivoTest {
 								Integer.valueOf(campos[6])
 								);
 						escrita.write(r.toString() + "\r\n");
-						qtde++;
 						
+						literaturas.add(r);
 
 						break;
 
@@ -128,9 +124,9 @@ public class ArquivoTest {
 								valorBool2,
 								campos[6]
 								);
+						literaturas.add(q);
 						
 						escrita.write(q.toString() + "\r\n");
-						qtde++;
 						
 						break;
 
@@ -143,7 +139,7 @@ public class ArquivoTest {
 
 				}
 
-				escrita.write(qtde + ";" + nomeResponsavel + ";" + dataRegistro + "\r\n");
+				escrita.write(lt.arquivoInfo());
 
 				leitura.close();
 				file.close();
