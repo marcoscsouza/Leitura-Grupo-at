@@ -1,0 +1,4 @@
+p;Leitura para aprender;presencial;2;Marcos;Hobbie
+l;2017;corvo e outros contos; 42.79f;horror; Edgar Allan Poe; Traduzido
+q;2019;Berserk Deluxe;353.50f;1;false;Kentaro Miura
+r;2021;PlayStation;19.90f;Europa;Jogos;285

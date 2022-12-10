@@ -17,6 +17,7 @@ public class Leitura {
 	private List<Literatura> literaturas;
 	
 	public Leitura() {
+		// TODO tem que colocar aqui a classe de associação e a classe principal para tratar exceções
 		dataRegistro = LocalDateTime.now();
 	}
 	
@@ -24,11 +25,18 @@ public class Leitura {
 	public String toString() {
 		
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		return String.format("%s;%s;%s;%d",
+		return String.format("%s;%s;%s",
 				dataRegistro.format(formato), 
 				detalhes, 
-				Presencial ? "Presencial" : "distância",
-				literaturas.size());
+				Presencial ? "Presencial" : "distância"
+				);
+		// literaturas.size()
+	}
+	
+	public String arquivoInfo() {
+		//escrita.write(qtde + ";" + nomeResponsavel + ";" + dataRegistro + "\r\n"
+		
+		return "";
 	}
 	
 	public void imprimir() throws GrupoInvalidoException, LiteraturaInvalidoException {

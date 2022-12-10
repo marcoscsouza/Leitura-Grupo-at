@@ -1,0 +1,5 @@
+09/12/2022;Leitura para aprender;distância2;Marcos;Hobbie
+2017;corvo e outros contos;42.79;horror; Edgar Allan Poe;Sem tradução
+2019;Berserk Deluxe;353.5;1;Desenvolvimento;Kentaro Miura
+2021;PlayStation;19.9;Europa;Jogos;285
+3;Marcos;09/12/2022

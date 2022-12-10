@@ -22,13 +22,13 @@ public class ArquivoTest {
 
 			try {
 
-				String dir = "c:/dev/";
+//				String dir = "c:/dev/";
 				String arq = "grupoLeitura.txt";
 
-				FileReader file = new FileReader(dir + arq);
+				FileReader file = new FileReader(arq);
 				BufferedReader leitura = new BufferedReader(file);
 
-				FileWriter fileW = new FileWriter(dir + "out_" + arq);
+				FileWriter fileW = new FileWriter("out_" + arq);
 				BufferedWriter escrita = new BufferedWriter(fileW);
 
 				String linha = leitura.readLine();
