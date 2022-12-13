@@ -39,95 +39,65 @@ public class ArquivoTest {
 
 				List<Literatura> literaturas = new ArrayList<Literatura>();
 				Leitura lt = null;
-				
+
 				while (linha != null) {
 
 					campos = linha.split(";");
 
 					switch (campos[0].toUpperCase()) {
-					
+
 					case "P":
-						
+
 						try {
-							boolean valorBool0 = true;
-							if ("Estudo".equals(campos[5])) {
-								valorBool0 = true;
-							}else {
-								valorBool0 = false; 
-							}
-							
-							lt = new Leitura(new Grupo(Integer.valueOf(campos[3]),campos[4],valorBool0),literaturas);
-							
+
+							boolean valorBool0 = "Estudo".equals(campos[5]);
+
+							lt = new Leitura(new Grupo(Integer.valueOf(campos[3]), campos[4], valorBool0), literaturas);
+
 							lt.setDetalhes(campos[1]);
-							lt.setPresencial("Presencial".equals(campos[2]) ? true : false );
-							
+							lt.setPresencial("Presencial".equals(campos[2]) ? true : false);
+
 						} catch (NumberFormatException | GrupoInvalidoException | LiteraturaInvalidoException e) {
 							System.out.println("[ERRO]" + e.getMessage());
 						}
-						
+
 						escrita.write(lt.toString() + lt.getGrupo().toString() + "\r\n");
-						
+
 						break;
 
 					case "L":
+
+						boolean valorBool = "Traduzido".equals(campos[6]);
 						
-						boolean valorBool = true;
-						if ("Traduzido".equals(campos[6])) {
-							valorBool = true;
-						}else {
-							valorBool = false; 
-						}
-						
-						Livro l = new Livro(
-								Integer.valueOf(campos[1]),
-								campos[2],
-								Float.valueOf(campos[3]),
-								campos[4],
-								campos[5],
-								valorBool								
-								);
+
+						Livro l = new Livro(Integer.valueOf(campos[1]), campos[2], Float.valueOf(campos[3]), campos[4],
+								campos[5], valorBool);
 						literaturas.add(l);
-						
+
 						escrita.write(l.toString() + "\r\n");
 
 						break;
 
 					case "R":
-						
-						Revista r = new Revista(
-								Integer.valueOf(campos[1]),
-								campos[2],
-								Float.valueOf(campos[3]),
-								campos[4],
-								campos[5],
-								Integer.valueOf(campos[6])
-								);
+
+						Revista r = new Revista(Integer.valueOf(campos[1]), campos[2], Float.valueOf(campos[3]),
+								campos[4], campos[5], Integer.valueOf(campos[6]));
 						escrita.write(r.toString() + "\r\n");
-						
+
 						literaturas.add(r);
 
 						break;
 
 					case "Q":
-						boolean valorBool2 = true;
-						if ("Finalizado".equals(campos[5])) {
-							valorBool2 = true;
-						}else {
-							valorBool2 = false; 
-						}
+						boolean valorBool2 = "Finalizado".equals(campos[5]);
 						
-						Quadrinho q = new Quadrinho(
-								Integer.valueOf(campos[1]),
-								campos[2],
-								Float.valueOf(campos[3]),
-								Integer.valueOf(campos[4]),
-								valorBool2,
-								campos[6]
-								);
+
+						Quadrinho q = new Quadrinho(Integer.valueOf(campos[1]), campos[2], Float.valueOf(campos[3]),
+								Integer.valueOf(campos[4]), valorBool2, campos[6]);
 						literaturas.add(q);
-						
+
 						escrita.write(q.toString() + "\r\n");
-						
+
 						break;
 
 					default:
